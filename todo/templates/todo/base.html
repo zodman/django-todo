@@ -12,7 +12,10 @@
     // thedate.x comes from the edit_task view. If this is a new entry, 
     // thedate won't be present and datepicker will fall back on the default (today).
     $(document).ready(function(){
-        $('#id_due_date').datepicker({defaultDate: new Date({{thedate.year}}, {{thedate.month}} - 1, {{thedate.day}}),});
+        $('#id_due_date').datepicker();
+        $("#search").click(function(e){
+            document.location.href="{%url todo-search %}?q=" + $("#id_search").val();
+        });
      });
 
 </script>
@@ -24,8 +27,8 @@
              <ul class="menu">
                  <li>  <a href="{% url todo-lists %}"> Index   </a></li>
                  <li>  <a href="{% url todo-mine %}"> Mine    </a></li>
-                 <li>  <a href="{% url todo-search %}"> Search </a></li>
                  <li>  <a href="{% url todo-add_list %}"> Add List </a></li>
+                 <li> <input id="id_search" type="text"> <a id="search" href="javascript:void(0);"> Search </a></li>
             </ul>
         </div>
         <div class="clear padding"></div>

@@ -380,12 +380,10 @@ def search(request):
     """
 
     if request.GET:    
-
         query_string = ''
         found_items = None
         if ('q' in request.GET) and request.GET['q'].strip():
             query_string = request.GET['q']
-
             found_items = Item.objects.filter(
                 Q(title__icontains=query_string) |
                 Q(note__icontains=query_string) 
@@ -396,7 +394,7 @@ def search(request):
             # In that case we still need found_items in a queryset so it can be "excluded" below.
             found_items = Item.objects.all()    
         
-        if request.GET['inc_complete'] == "0" :
+        if request.GET.get('inc_complete',1) == "0" :
             found_items = found_items.exclude(completed=True)
             
     else :
