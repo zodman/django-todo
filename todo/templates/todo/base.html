@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load uni_form_tags %}
 {% block page_heading %}GTD (Getting Things Done){% endblock %}
 {% block extrahead %}
 <!-- CSS and JavaScript for django-todo -->
@@ -19,7 +20,7 @@
      });
 
 </script>
-
+{% uni_form_setup  %}
 {% endblock extrahead %}
 
         {%block menu %}

@@ -4,6 +4,9 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User,Group
 from todo.models import Item, List
 import datetime
+from uni_form.helpers import FormHelper, Submit
+from uni_form.helpers import Layout, Fieldset, Row, HTML,Column
+
 
 class AddListForm(ModelForm):    
     # The picklist showing allowable groups to which a new list can be added
@@ -15,7 +18,9 @@ class AddListForm(ModelForm):
 
     class Meta:
         model = List
-        
+    helper = FormHelper()
+    submit = Submit("submit","Submit")
+    helper.add_input(submit)
  
         
 class AddItemForm(ModelForm):
@@ -40,6 +45,9 @@ class AddItemForm(ModelForm):
     class Meta:
         model = Item
         
+    helper = FormHelper()
+    submit = Submit("submit","Submit")
+    helper.add_input(submit)
 
 
 class EditItemForm(ModelForm):
@@ -55,6 +63,7 @@ class EditItemForm(ModelForm):
         exclude = ('created_date','created_by',)             
         
 
+    helper = FormHelper()
         
 class AddExternalItemForm(ModelForm):
     """Form to allow users who are not part of the GTD system to file a ticket."""
@@ -71,6 +80,7 @@ class AddExternalItemForm(ModelForm):
         model = Item
         exclude = ('list','created_date','due_date','created_by','assigned_to',)
         
+    helper = FormHelper()
 
 
 class SearchForm(ModelForm):
